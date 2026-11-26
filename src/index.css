@@ -5,18 +5,22 @@
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-@property --neon-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+@keyframes neon-orbit {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
-@keyframes neon-spin {
-  from {
-    --neon-angle: 0deg;
+@keyframes neon-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
   }
-  to {
-    --neon-angle: 360deg;
+  50% {
+    opacity: 0.95;
   }
 }
 
@@ -25,8 +29,8 @@
   100% {
     box-shadow:
       0 10px 26px rgba(10, 18, 38, 0.48),
-      0 0 0 0 rgba(229, 185, 107, 0.38),
-      inset 0 2px 4px rgba(255, 244, 224, 0.45),
+      0 0 0 0 rgba(229, 185, 107, 0.42),
+      inset 0 2px 4px rgba(255, 244, 224, 0.48),
       inset 0 -4px 8px rgba(104, 48, 16, 0.45);
   }
   50% {
@@ -38,83 +42,171 @@
   }
 }
 
+@keyframes envelope-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes starlight-twinkle {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: translateY(0px) scale(0.9);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translateY(-10px) scale(1.15);
+  }
+}
+
 html,
 body {
   background-color: #081226;
   color: #f7f3ea;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Precision luminous neon perimeter around the invitation form */
-.neon-form-shell {
+/*
+ * Ultra-crisp, cross-browser GPU-accelerated architectural neon perimeter
+ * Uses transform-based conic rotation so it runs at 60fps on iOS Safari, Android, Chrome & Firefox.
+ */
+.neon-form-wrapper {
   position: relative;
   border-radius: 1.5rem;
-  padding: 2px;
-  background: conic-gradient(
-    from var(--neon-angle),
-    rgba(229, 185, 107, 0.14) 0deg,
-    rgba(229, 185, 107, 0.25) 55deg,
-    #f6d998 92deg,
-    #ffffff 105deg,
-    #52d1dc 125deg,
-    rgba(82, 209, 220, 0.18) 170deg,
-    rgba(229, 185, 107, 0.12) 235deg,
-    #e5b96b 280deg,
-    #fff3d6 296deg,
-    #52d1dc 315deg,
-    rgba(229, 185, 107, 0.14) 360deg
-  );
-  animation: neon-spin 7s linear infinite;
-  box-shadow:
-    0 0 28px -4px rgba(229, 185, 107, 0.28),
-    0 0 56px -12px rgba(82, 209, 220, 0.22),
-    0 28px 65px -20px rgba(2, 6, 18, 0.85);
 }
 
-.neon-form-shell::before {
+/* Outer soft neon ambient bloom */
+.neon-form-wrapper::before {
   content: "";
   position: absolute;
-  inset: -4px;
+  inset: -3px;
   border-radius: 1.65rem;
-  background: conic-gradient(
-    from var(--neon-angle),
-    transparent 0deg,
-    rgba(246, 217, 152, 0.35) 95deg,
-    rgba(82, 209, 220, 0.32) 125deg,
-    transparent 180deg,
-    rgba(229, 185, 107, 0.32) 285deg,
-    rgba(82, 209, 220, 0.25) 315deg,
-    transparent 360deg
+  background: linear-gradient(
+    135deg,
+    rgba(246, 206, 118, 0.52) 0%,
+    rgba(56, 232, 255, 0.36) 50%,
+    rgba(246, 206, 118, 0.52) 100%
   );
-  filter: blur(16px);
-  opacity: 0.72;
-  z-index: -1;
+  filter: blur(18px);
+  opacity: 0.78;
+  z-index: 0;
   pointer-events: none;
-  animation: neon-spin 7s linear infinite;
+  animation: neon-pulse 4.2s ease-in-out infinite;
 }
 
-/* Subtle linen paper grain for the 3D envelope */
-.envelope-paper {
-  background-color: #f6f1e7;
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      rgba(26, 40, 72, 0.018) 0px,
-      rgba(26, 40, 72, 0.018) 1px,
-      transparent 1px,
-      transparent 4px
-    ),
-    repeating-linear-gradient(
-      90deg,
-      rgba(26, 40, 72, 0.016) 0px,
-      rgba(26, 40, 72, 0.016) 1px,
-      transparent 1px,
-      transparent 4px
-    ),
-    radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.85), rgba(235, 227, 212, 0.55));
+/* Clipping track for the crisp rotating neon tube */
+.neon-form-shell {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  padding: 2px;
+  background: rgba(246, 206, 118, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(255, 224, 150, 0.25),
+    0 0 22px -2px rgba(245, 202, 112, 0.34),
+    0 0 42px -8px rgba(56, 232, 255, 0.26),
+    0 24px 60px -18px rgba(2, 6, 18, 0.9);
 }
 
+/* Rotating luminous light-beam layer */
+.neon-form-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 220%;
+  aspect-ratio: 1 / 1;
+  background: conic-gradient(
+    from 0deg,
+    rgba(246, 206, 118, 0.22) 0deg,
+    rgba(246, 206, 118, 0.4) 45deg,
+    #ffe39b 75deg,
+    #ffffff 88deg,
+    #38e8ff 106deg,
+    rgba(56, 232, 255, 0.28) 145deg,
+    rgba(246, 206, 118, 0.2) 195deg,
+    rgba(246, 206, 118, 0.4) 230deg,
+    #f6ce76 258deg,
+    #fff7e2 272deg,
+    #38e8ff 292deg,
+    rgba(56, 232, 255, 0.24) 330deg,
+    rgba(246, 206, 118, 0.22) 360deg
+  );
+  animation: neon-orbit 6.5s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.neon-form-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: calc(1.5rem - 2px);
+  background: linear-gradient(180deg, rgba(12, 27, 54, 0.98) 0%, rgba(9, 21, 43, 0.99) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 240, 206, 0.14);
+}
+
+/* Subtle neon hairline accent divider */
+.neon-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(56, 232, 255, 0.05) 0%,
+    rgba(246, 206, 118, 0.6) 35%,
+    rgba(56, 232, 255, 0.65) 65%,
+    rgba(246, 206, 118, 0.05) 100%
+  );
+  box-shadow: 0 0 10px rgba(246, 206, 118, 0.35);
+}
+
+/* Neon focus ring for form inputs */
+.neon-input {
+  transition:
+    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 180ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neon-input:focus {
+  border-color: #f6ce76;
+  box-shadow:
+    0 0 0 1px rgba(246, 206, 118, 0.85),
+    0 0 18px rgba(246, 206, 118, 0.3),
+    0 0 28px -4px rgba(56, 232, 255, 0.22);
+}
+
+/* Active neon selection card */
+.neon-option-active {
+  border-color: rgba(246, 206, 118, 0.95);
+  box-shadow:
+    0 0 0 1px rgba(246, 206, 118, 0.5),
+    0 0 20px -3px rgba(246, 206, 118, 0.36),
+    0 0 26px -8px rgba(56, 232, 255, 0.28),
+    inset 0 1px 0 rgba(255, 245, 224, 0.16);
+}
+
+/* Primary CTA neon glow */
+.neon-cta-btn {
+  box-shadow:
+    0 0 0 1px rgba(255, 238, 196, 0.45),
+    0 10px 28px -6px rgba(246, 206, 118, 0.55),
+    0 0 22px -4px rgba(56, 232, 255, 0.22);
+}
+
+.neon-cta-btn:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 245, 218, 0.7),
+    0 14px 34px -6px rgba(246, 206, 118, 0.7),
+    0 0 28px -2px rgba(56, 232, 255, 0.32);
+}
+
+/* Envelope 3D scene */
 .envelope-scene {
   perspective: 1400px;
 }
@@ -148,82 +240,6 @@ body {
   filter: brightness(1.06);
 }
 
-/* Neon focus ring for form inputs */
-.neon-input {
-  transition:
-    border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1),
-    background-color 180ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.neon-input:focus {
-  border-color: #e5b96b;
-  box-shadow:
-    0 0 0 1px rgba(229, 185, 107, 0.75),
-    0 0 18px rgba(229, 185, 107, 0.22);
-}
-
-/* Selected option card subtle luminous outline */
-.neon-option-active {
-  border-color: rgba(235, 195, 121, 0.9);
-  box-shadow:
-    0 0 0 1px rgba(235, 195, 121, 0.45),
-    0 0 22px -4px rgba(229, 185, 107, 0.28),
-    inset 0 1px 0 rgba(255, 245, 224, 0.12);
-}
-
-@keyframes music-eq {
-  0%,
-  100% {
-    transform: scaleY(0.35);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
-@keyframes envelope-float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-7px);
-  }
-}
-
-@keyframes starlight-twinkle {
-  0%,
-  100% {
-    opacity: 0.18;
-    transform: translateY(0px) scale(0.9);
-  }
-  50% {
-    opacity: 0.72;
-    transform: translateY(-10px) scale(1.15);
-  }
-}
-
-.music-bar {
-  height: 14px;
-  transform-origin: bottom center;
-  animation: music-eq 0.9s ease-in-out infinite;
-}
-
-.music-bar-1 {
-  animation-delay: 0s;
-}
-
-.music-bar-2 {
-  animation-delay: 0.22s;
-  animation-duration: 0.72s;
-}
-
-.music-bar-3 {
-  animation-delay: 0.4s;
-  animation-duration: 1.05s;
-}
-
 .envelope-float-idle {
   animation: envelope-float 4.8s ease-in-out infinite;
 }
@@ -237,11 +253,26 @@ body {
   animation-delay: var(--twinkle-delay, 0s);
 }
 
+@media (max-width: 639px) {
+  .neon-form-wrapper,
+  .neon-form-shell {
+    border-radius: 1.25rem;
+  }
+
+  .neon-form-wrapper::before {
+    border-radius: 1.35rem;
+    filter: blur(13px);
+  }
+
+  .neon-form-inner {
+    border-radius: calc(1.25rem - 2px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .neon-form-shell,
-  .neon-form-shell::before,
+  .neon-form-wrapper::before,
+  .neon-form-beam,
   .wax-seal-btn,
-  .music-bar,
   .envelope-float-idle,
   .starlight-mote {
     animation: none !important;
@@ -251,4 +282,3 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
-
