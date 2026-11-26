@@ -16,7 +16,7 @@ export interface InvitationSubmission {
 }
 
 export const EVENT_DETAILS = {
-  eyebrow: 'Une parenthèse joyeuse',
+  eyebrow: 'Une joyeuse parenthèse',
   title: 'Repas Familial du 25 Décembre',
   dateLabel: '25 Décembre',
   timeLabel: '13h00',
