@@ -194,21 +194,21 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
           aria-labelledby="invitation-heading"
           className="flex flex-col lg:col-span-5 lg:sticky lg:top-10"
         >
-          <p className="text-[11px] font-semibold tracking-[0.26em] text-[#E5B96B] uppercase sm:text-xs">
+          <p className="font-script text-[1.95rem] leading-tight text-[#F3D08E] sm:text-[2.35rem]">
             {EVENT_DETAILS.eyebrow}
           </p>
 
           <h1
             id="invitation-heading"
-            className="mt-2.5 font-serif text-[clamp(2rem,6vw,3.15rem)] font-semibold leading-[1.08] tracking-tight text-[#FBF7EF]"
+            className="mt-2 font-serif text-[clamp(2rem,6vw,3.15rem)] font-semibold leading-[1.08] tracking-tight text-[#FBF7EF]"
             style={{ textWrap: 'balance' }}
           >
             {EVENT_DETAILS.title}
           </h1>
 
           <p className="mt-3.5 max-w-md text-sm leading-relaxed text-[#C2D0E6] sm:mt-4 sm:text-[15px]">
-            Choisis l&apos;ambiance qui te convient pour notre repas de Noël, sélectionne ton
-            restaurant favori si tu votes Team Restau, puis confirme ta participation.
+            Choisis l&apos;ambiance qui te convient pour notre repas de Noël, puis confirme ta
+            participation.
           </p>
 
           {/* Practical Info List — Compact grid on mobile/tablet, crisp list on desktop */}
@@ -597,10 +597,10 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                       <textarea
                         id={noteId}
                         name="note"
-                        rows={2}
+                        rows={3}
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
-                        placeholder="Ex. Je viens avec 2 personnes, ou une suggestion pour le repas..."
+                        placeholder="Je vous propose le restaurant xxxx.... ou examinons les droits de bouchons par exemple......."
                         className="neon-input mt-2 w-full resize-none rounded-xl border border-white/15 bg-[#071226]/95 px-4 py-3 text-base text-[#FBF7EF] placeholder-[#6D84A8] focus:outline-none sm:text-sm"
                       />
                     </div>
@@ -618,7 +618,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                         <span>
                           {status === 'submitting'
                             ? 'Préparation de ta confirmation...'
-                            : 'Envoyer ma réponse sur WhatsApp'}
+                            : 'Cliques ici et envois ta réponse'}
                         </span>
                       </motion.button>
 

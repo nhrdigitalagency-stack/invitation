@@ -71,12 +71,12 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
       className="relative z-10 flex min-h-[100svh] w-full flex-col items-center justify-center px-4 py-8 sm:px-8 sm:py-12"
     >
       <div className="flex w-full max-w-2xl flex-col items-center text-center">
-        {/* Refined editorial invitation header */}
+        {/* Calligraphic invitation header */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
-          className="text-[11px] font-medium tracking-[0.26em] text-[#E5B96B] uppercase sm:text-[13px]"
+          className="font-script text-[1.9rem] leading-tight text-[#F3D08E] sm:text-[2.45rem]"
         >
           {EVENT_DETAILS.eyebrow}
         </motion.p>
@@ -343,10 +343,10 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
               className="h-4 w-4 text-[#E5B96B] transition-transform duration-200 group-hover:-translate-y-0.5"
               aria-hidden="true"
             />
-            <span>Tapez pour continuer</span>
+            <span>Tapes pour ouvrir</span>
           </button>
           <p className="max-w-xs text-xs leading-relaxed text-[#9BB0D1] sm:max-w-none">
-            Appuyez sur le sceau central de l&apos;enveloppe pour ouvrir l&apos;invitation
+            Appuyez sur le sceau central de l&apos;enveloppe pour ouvrir
           </p>
         </motion.div>
       </div>
