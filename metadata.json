@@ -1,0 +1,6 @@
+{
+  "name": "Invitation — Repas Familial du 25 Décembre",
+  "description": "Invitation interactive avec enveloppe 3D et confirmation de participation par WhatsApp pour le Repas Familial du 25 Décembre à 13h.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
