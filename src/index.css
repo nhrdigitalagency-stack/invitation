@@ -172,10 +172,78 @@ body {
     inset 0 1px 0 rgba(255, 245, 224, 0.12);
 }
 
+@keyframes music-eq {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes envelope-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes starlight-twinkle {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: translateY(0px) scale(0.9);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translateY(-10px) scale(1.15);
+  }
+}
+
+.music-bar {
+  height: 14px;
+  transform-origin: bottom center;
+  animation: music-eq 0.9s ease-in-out infinite;
+}
+
+.music-bar-1 {
+  animation-delay: 0s;
+}
+
+.music-bar-2 {
+  animation-delay: 0.22s;
+  animation-duration: 0.72s;
+}
+
+.music-bar-3 {
+  animation-delay: 0.4s;
+  animation-duration: 1.05s;
+}
+
+.envelope-float-idle {
+  animation: envelope-float 4.8s ease-in-out infinite;
+}
+
+.envelope-float-idle:hover {
+  animation-play-state: paused;
+}
+
+.starlight-mote {
+  animation: starlight-twinkle var(--twinkle-duration, 6s) ease-in-out infinite;
+  animation-delay: var(--twinkle-delay, 0s);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon-form-shell,
   .neon-form-shell::before,
-  .wax-seal-btn {
+  .wax-seal-btn,
+  .music-bar,
+  .envelope-float-idle,
+  .starlight-mote {
     animation: none !important;
   }
 
@@ -183,3 +251,4 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+

@@ -206,6 +206,37 @@ export const QuiltedBackdrop: React.FC = () => {
           <circle cx="105" cy="138" r="2.6" fill="#E5B96B" opacity="0.75" />
         </g>
       </svg>
+      {/* Subtle festive golden starlight motes */}
+      <div className="absolute inset-0">
+        {[
+          { left: '12%', top: '22%', size: 3, dur: '6.2s', delay: '0.2s' },
+          { left: '24%', top: '76%', size: 2.5, dur: '7.4s', delay: '1.1s' },
+          { left: '38%', top: '14%', size: 2, dur: '5.8s', delay: '2.4s' },
+          { left: '54%', top: '84%', size: 3, dur: '6.8s', delay: '0.8s' },
+          { left: '68%', top: '19%', size: 2.5, dur: '7.1s', delay: '1.9s' },
+          { left: '82%', top: '36%', size: 3.5, dur: '6.4s', delay: '0.5s' },
+          { left: '88%', top: '68%', size: 2, dur: '5.5s', delay: '2.8s' },
+          { left: '16%', top: '52%', size: 2, dur: '7.6s', delay: '1.5s' },
+          { left: '74%', top: '82%', size: 2.5, dur: '6.9s', delay: '2.1s' },
+          { left: '46%', top: '30%', size: 2, dur: '8.2s', delay: '0.4s' },
+        ].map((mote, index) => (
+          <span
+            key={index}
+            className="starlight-mote absolute rounded-full bg-[#F5D692]"
+            style={
+              {
+                left: mote.left,
+                top: mote.top,
+                width: `${mote.size}px`,
+                height: `${mote.size}px`,
+                boxShadow: '0 0 8px rgba(245, 214, 146, 0.75)',
+                '--twinkle-duration': mote.dur,
+                '--twinkle-delay': mote.delay,
+              } as React.CSSProperties
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 };

@@ -4,10 +4,14 @@ import { ChevronUp } from 'lucide-react';
 import { EVENT_DETAILS } from '../data/invitation';
 
 interface Envelope3DProps {
+  onOpenStart?: () => void;
   onOpenComplete: () => void;
 }
 
-export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
+export const Envelope3D: React.FC<Envelope3DProps> = ({
+  onOpenStart,
+  onOpenComplete,
+}) => {
   const prefersReducedMotion = useReducedMotion();
   const [phase, setPhase] = useState<'sealed' | 'opening' | 'rising'>('sealed');
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
@@ -21,6 +25,8 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
 
   const handleOpen = () => {
     if (phase !== 'sealed') return;
+
+    onOpenStart?.();
 
     if (prefersReducedMotion) {
       onOpenComplete();
@@ -72,18 +78,31 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
     >
       <div className="flex w-full max-w-2xl flex-col items-center text-center">
         {/* Refined editorial invitation header */}
-        <p className="text-xs font-medium tracking-[0.28em] text-[#E5B96B] uppercase sm:text-[13px]">
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.06, ease: [0.16, 1, 0.3, 1] }}
+          className="text-xs font-medium tracking-[0.28em] text-[#E5B96B] uppercase sm:text-[13px]"
+        >
           {EVENT_DETAILS.eyebrow}
-        </p>
+        </motion.p>
 
-        <h1
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.52, delay: 0.14, ease: [0.16, 1, 0.3, 1] }}
           className="mt-3 font-serif text-4xl font-semibold leading-[1.1] tracking-tight text-[#FBF7EF] sm:text-5xl md:text-[3.5rem]"
           style={{ textWrap: 'balance' }}
         >
           {EVENT_DETAILS.title}
-        </h1>
+        </motion.h1>
 
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-[#C3D1E8] tabular-nums">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.48, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-4 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-sm text-[#C3D1E8] tabular-nums"
+        >
           <span>{EVENT_DETAILS.dateLabel}</span>
           <span aria-hidden="true" className="text-[#E5B96B]/70">
             ·
@@ -93,11 +112,16 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
             ·
           </span>
           <span>{EVENT_DETAILS.contributionLabel}</span>
-        </div>
+        </motion.div>
 
         {/* 3D Interactive Envelope Stage */}
-        <div
-          className="envelope-scene relative mt-10 w-full max-w-[440px] sm:mt-12 sm:max-w-[500px]"
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94, y: 18 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          className={`envelope-scene relative mt-10 w-full max-w-[440px] sm:mt-12 sm:max-w-[500px] ${
+            phase === 'sealed' ? 'envelope-float-idle' : ''
+          }`}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
         >
@@ -293,10 +317,15 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Exact bottom instruction requested by user */}
-        <div className="mt-12 flex flex-col items-center gap-2 sm:mt-14">
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-12 flex flex-col items-center gap-2 sm:mt-14"
+        >
           <button
             type="button"
             onClick={handleOpen}
@@ -312,7 +341,7 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
           <p className="text-xs text-[#9BB0D1]">
             Appuyez sur le sceau central de l&apos;enveloppe pour ouvrir l&apos;invitation
           </p>
-        </div>
+        </motion.div>
       </div>
     </motion.section>
   );

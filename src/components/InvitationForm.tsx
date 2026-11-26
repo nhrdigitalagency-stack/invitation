@@ -26,6 +26,7 @@ import {
 
 interface InvitationFormProps {
   onCloseEnvelope: () => void;
+  onCelebrate: () => void;
 }
 
 interface FormErrors {
@@ -34,7 +35,10 @@ interface FormErrors {
   restaurantId?: string;
 }
 
-export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope }) => {
+export const InvitationForm: React.FC<InvitationFormProps> = ({
+  onCloseEnvelope,
+  onCelebrate,
+}) => {
   const firstNameId = useId();
   const noteId = useId();
 
@@ -120,6 +124,9 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
     const message = buildWhatsAppMessage(submission);
     const whatsappUrl = buildWhatsAppUrl(message);
 
+    // Trigger festive golden confetti celebration immediately upon validation
+    onCelebrate();
+
     // Trigger WhatsApp navigation via anchor click (avoids window.open while honoring user gesture)
     const anchor = document.createElement('a');
     anchor.href = whatsappUrl;
@@ -178,9 +185,12 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
       </div>
 
       {/* Main 2-column desktop split / crisp single-column mobile stack */}
-      <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12">
+      <div className="grid grid-cols-1 items-start gap-10 pb-20 sm:pb-14 lg:grid-cols-12 lg:gap-12">
         {/* Left Editorial Column — Faithful details from the invitation paper */}
-        <section
+        <motion.section
+          initial={{ opacity: 0, x: -16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.55, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
           aria-labelledby="invitation-heading"
           className="flex flex-col lg:col-span-5 lg:sticky lg:top-10"
         >
@@ -198,8 +208,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
 
           <p className="mt-4 max-w-md text-[15px] leading-relaxed text-[#C2D0E6]">
             Choisis l&apos;ambiance qui te convient pour notre repas de Noël, sélectionne ton
-            restaurant favori si tu votes Team Restau, puis envoie directement ta réponse sur
-            WhatsApp.
+            restaurant favori si tu votes Team Restau, puis confirme ta participation.
           </p>
 
           {/* Practical Info Grid — Hairline dividers, tabular numbers, zero pill clutter */}
@@ -237,10 +246,10 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
             <div className="flex items-center justify-between gap-4 py-4">
               <dt className="flex items-center gap-3 text-sm text-[#9FB3D4]">
                 <MessageCircle className="h-4 w-4 text-[#E5B96B]" aria-hidden="true" />
-                <span>Confirmation WhatsApp</span>
+                <span>Confirmation</span>
               </dt>
-              <dd className="text-sm font-medium text-[#F8F4EC] tabular-nums">
-                {EVENT_DETAILS.whatsappDisplay}
+              <dd className="text-sm font-medium text-[#F8F4EC]">
+                Par WhatsApp
               </dd>
             </div>
           </dl>
@@ -249,14 +258,25 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
           <p className="mt-6 font-serif text-xl italic text-[#F1D59B]">
             * {EVENT_DETAILS.majorityRule}
           </p>
-        </section>
+        </motion.section>
 
         {/* Right Column — Precision Neon-Framed RSVP Form */}
-        <section aria-label="Formulaire de vote et confirmation" className="lg:col-span-7">
+        <motion.section
+          initial={{ opacity: 0, y: 20, scale: 0.985 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.58, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+          aria-label="Formulaire de vote et confirmation"
+          className="lg:col-span-7"
+        >
           <div className="neon-form-shell">
             <div className="rounded-[calc(1.5rem-2px)] bg-[#0C1B36]/96 p-6 sm:p-8 md:p-9">
               {status === 'sent' && lastSubmission ? (
-                <div className="flex flex-col">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.96, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col"
+                >
                   <div className="flex items-center gap-3">
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E5B96B]/18 text-[#F3D08E] ring-1 ring-[#E5B96B]/45">
                       <Check className="h-5 w-5" aria-hidden="true" />
@@ -266,7 +286,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
                         Ta réponse est prête pour WhatsApp
                       </h2>
                       <p className="text-xs text-[#A5B8D8]">
-                        Destinataire : {EVENT_DETAILS.whatsappDisplay}
+                        Confirmation enregistrée pour le {EVENT_DETAILS.dateLabel}
                       </p>
                     </div>
                   </div>
@@ -305,11 +325,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
 
                   <p className="mt-4 text-xs leading-relaxed text-[#A7B9D7]">
                     Si WhatsApp ne s&apos;est pas ouvert automatiquement, clique sur le bouton
-                    ci-dessous pour envoyer directement ton message au{' '}
-                    <span className="font-medium text-[#F7F3EA] tabular-nums">
-                      {EVENT_DETAILS.whatsappDisplay}
-                    </span>
-                    .
+                    ci-dessous pour transmettre ton message.
                   </p>
 
                   <div className="mt-6 flex flex-col gap-3 sm:flex-row">
@@ -349,7 +365,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
                   >
                     Modifier ma réponse
                   </button>
-                </div>
+                </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="space-y-7">
                   <div className="border-b border-white/10 pb-5">
@@ -357,11 +373,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
                       Confirme ta présence et ton vote
                     </h2>
                     <p className="mt-1.5 text-sm text-[#A5B8D8]">
-                      Ta réponse sera formatée et envoyée par WhatsApp au{' '}
-                      <span className="font-medium text-[#E5B96B] tabular-nums">
-                        {EVENT_DETAILS.whatsappDisplay}
-                      </span>
-                      .
+                      Remplis ton prénom et tes choix puis valide pour transmettre ta réponse.
                     </p>
                   </div>
 
@@ -585,31 +597,30 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({ onCloseEnvelope 
 
                   {/* Submit Action */}
                   <div className="pt-1">
-                    <button
+                    <motion.button
                       type="submit"
                       disabled={status === 'submitting'}
-                      className="inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-[#E5B96B] px-6 py-4 text-[15px] font-semibold text-[#081226] shadow-[0_12px_30px_-8px_rgba(229,185,107,0.5)] transition-all duration-150 hover:bg-[#F1C97E] active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5D391] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C1B36]"
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.985 }}
+                      className="inline-flex w-full cursor-pointer items-center justify-center gap-2.5 rounded-xl bg-[#E5B96B] px-6 py-4 text-[15px] font-semibold text-[#081226] shadow-[0_12px_30px_-8px_rgba(229,185,107,0.5)] transition-colors duration-150 hover:bg-[#F1C97E] disabled:cursor-not-allowed disabled:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5D391] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0C1B36]"
                     >
                       <Send className="h-4 w-4 shrink-0" aria-hidden="true" />
                       <span className="whitespace-nowrap">
                         {status === 'submitting'
-                          ? 'Préparation du message WhatsApp...'
+                          ? 'Préparation de ta confirmation...'
                           : 'Envoyer ma réponse sur WhatsApp'}
                       </span>
-                    </button>
+                    </motion.button>
 
-                    <p className="mt-3 text-center text-xs text-[#8FA5C9]">
-                      Envoi direct vers WhatsApp ({EVENT_DETAILS.whatsappDisplay}) ·{' '}
-                      <span className="italic text-[#E5C98E]">
-                        {EVENT_DETAILS.majorityRule}
-                      </span>
+                    <p className="mt-3 text-center text-xs italic text-[#E5C98E]">
+                      * {EVENT_DETAILS.majorityRule}
                     </p>
                   </div>
                 </form>
               )}
             </div>
           </div>
-        </section>
+        </motion.section>
       </div>
     </motion.main>
   );
