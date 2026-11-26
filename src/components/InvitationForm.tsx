@@ -618,7 +618,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                         <span>
                           {status === 'submitting'
                             ? 'Préparation de ta confirmation…'
-                            : 'Clique ici et envoie ta réponse'}
+                            : 'Cliques ici et envoie ta réponse'}
                         </span>
                       </motion.button>
 

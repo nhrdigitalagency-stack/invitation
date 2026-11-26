@@ -343,10 +343,10 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
               className="h-4 w-4 text-[#E5B96B] transition-transform duration-200 group-hover:-translate-y-0.5"
               aria-hidden="true"
             />
-            <span>Tape pour ouvrir</span>
+            <span>Tapes pour ouvrir</span>
           </button>
           <p className="max-w-xs text-xs leading-relaxed text-[#9BB0D1] sm:max-w-none">
-            Appuie sur le sceau central de l&apos;enveloppe pour ouvrir
+            Appuies sur le sceau central de l&apos;enveloppe pour ouvrir
           </p>
         </motion.div>
       </div>
