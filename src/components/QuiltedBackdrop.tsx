@@ -44,7 +44,7 @@ export const QuiltedBackdrop: React.FC = () => {
 
       {/* Top-left ornament: Sculpted warm gold & terracotta Heart */}
       <svg
-        className="absolute left-3 top-3 h-28 w-28 opacity-80 sm:left-6 sm:top-6 sm:h-40 sm:w-40 md:h-44 md:w-44"
+        className="ornament-3d-left absolute left-3 top-3 h-28 w-28 opacity-80 sm:left-6 sm:top-6 sm:h-40 sm:w-40 md:h-44 md:w-44"
         viewBox="0 0 180 180"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ export const QuiltedBackdrop: React.FC = () => {
 
       {/* Bottom-right ornament: Clasped Hands symbolizing family solidarity */}
       <svg
-        className="absolute bottom-3 right-3 h-32 w-32 opacity-80 sm:bottom-6 sm:right-6 sm:h-44 sm:w-44 md:h-48 md:w-48"
+        className="ornament-3d-right absolute bottom-3 right-3 h-32 w-32 opacity-80 sm:bottom-6 sm:right-6 sm:h-44 sm:w-44 md:h-48 md:w-48"
         viewBox="0 0 220 220"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
