@@ -165,10 +165,10 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
             >
               <div className="flex h-full flex-col items-center justify-center border border-[#E5C88F]/60 px-2.5 py-2 sm:px-3">
                 <span className="text-[9px] font-semibold tracking-[0.22em] text-[#9A6E2A] uppercase sm:text-[10px]">
-                  Repas Familial
+                  Repas familial
                 </span>
                 <p className="mt-0.5 font-serif text-lg font-semibold text-[#112244] sm:mt-1 sm:text-2xl">
-                  25 Décembre · 13h00
+                  25 décembre · 13h00
                 </p>
                 <p className="mt-0.5 text-[11px] font-medium text-[#526280] tabular-nums sm:mt-1 sm:text-xs">
                   {EVENT_DETAILS.contributionLabel}
@@ -306,7 +306,7 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
                 type="button"
                 onClick={handleOpen}
                 disabled={phase !== 'sealed'}
-                aria-label="Ouvrir l'invitation du Repas Familial du 25 Décembre"
+                aria-label="Ouvrir l'invitation au repas familial du 25 décembre"
                 className="wax-seal-btn group relative flex h-[68px] w-[68px] cursor-pointer items-center justify-center rounded-full text-[#FFF9EF] transition-transform duration-200 ease-out hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F5D391] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4EDE1] sm:h-[86px] sm:w-[86px]"
               >
                 <span
@@ -318,7 +318,7 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
                     25
                   </span>
                   <span className="mt-0.5 text-[8px] font-semibold tracking-[0.22em] text-[#FFE8CC] uppercase sm:text-[9px]">
-                    Déc
+                    déc.
                   </span>
                 </span>
               </button>
@@ -343,10 +343,10 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
               className="h-4 w-4 text-[#E5B96B] transition-transform duration-200 group-hover:-translate-y-0.5"
               aria-hidden="true"
             />
-            <span>Tapes pour ouvrir</span>
+            <span>Tape pour ouvrir</span>
           </button>
           <p className="max-w-xs text-xs leading-relaxed text-[#9BB0D1] sm:max-w-none">
-            Appuyez sur le sceau central de l&apos;enveloppe pour ouvrir
+            Appuie sur le sceau central de l&apos;enveloppe pour ouvrir
           </p>
         </motion.div>
       </div>

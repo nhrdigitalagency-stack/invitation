@@ -17,11 +17,11 @@ export interface InvitationSubmission {
 
 export const EVENT_DETAILS = {
   eyebrow: 'Une joyeuse parenthèse',
-  title: 'Repas Familial du 25 Décembre',
-  dateLabel: '25 Décembre',
+  title: 'Repas familial du 25 décembre',
+  dateLabel: '25 décembre',
   timeLabel: '13h00',
   contributionLabel: '15 000 FCFA / personne',
-  majorityRule: "La majorité l'emporte évidemment",
+  majorityRule: "La majorité l'emporte, évidemment.",
   whatsappDisplay: '+237 99000811',
   whatsappDigits: '23799000811',
 } as const;

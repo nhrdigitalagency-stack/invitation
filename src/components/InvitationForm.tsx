@@ -88,7 +88,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
       nextErrors.firstName = 'Merci d’indiquer ton prénom avant d’envoyer.';
     }
     if (!team) {
-      nextErrors.team = 'Choisis entre Team Maison ou Team Restau.';
+      nextErrors.team = 'Choisis entre Team Maison et Team Restau.';
     }
     if (team === 'restau' && !restaurantId) {
       nextErrors.restaurantId = 'Sélectionne le restaurant de ton choix.';
@@ -379,18 +379,18 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                         Confirme ta présence et ton vote
                       </h2>
                       <p className="mt-1.5 text-xs leading-relaxed text-[#A5B8D8] sm:text-sm">
-                        Remplis ton prénom et tes choix puis valide pour transmettre ta réponse.
+                        Indique ton prénom et tes choix, puis valide pour transmettre ta réponse.
                       </p>
                       <div className="neon-divider mt-4 sm:mt-5" aria-hidden="true" />
                     </div>
 
-                    {/* 1. Ton Prénom */}
+                    {/* 1. Ton prénom */}
                     <div>
                       <label
                         htmlFor={firstNameId}
                         className="block text-sm font-semibold text-[#F4EFE4]"
                       >
-                        Ton Prénom <span className="text-[#F6CE76]">*</span>
+                        Ton prénom <span className="text-[#F6CE76]">*</span>
                       </label>
                       <input
                         id={firstNameId}
@@ -405,7 +405,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                             setErrors((prev) => ({ ...prev, firstName: undefined }));
                           }
                         }}
-                        placeholder="Ex. Sarah, Marc, Junior..."
+                        placeholder="Ex. : Sarah, Marc, Junior…"
                         aria-invalid={Boolean(errors.firstName)}
                         aria-describedby={errors.firstName ? `${firstNameId}-error` : undefined}
                         className={`neon-input mt-2 w-full rounded-xl border bg-[#071226]/95 px-4 py-3.5 text-base text-[#FBF7EF] placeholder-[#6D84A8] focus:outline-none sm:mt-2.5 sm:text-[15px] ${
@@ -523,7 +523,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                         </legend>
                         <span className="text-[11px] text-[#8FA5C9] sm:text-xs">
                           {team === 'maison'
-                            ? 'Optionnel pour Team Maison'
+                            ? 'Facultatif pour Team Maison'
                             : '4 adresses proposées à Yaoundé'}
                         </span>
                       </div>
@@ -592,7 +592,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                         className="flex items-baseline justify-between gap-2 text-sm font-medium text-[#D6E0F0]"
                       >
                         <span>Un petit mot ou une précision</span>
-                        <span className="text-xs font-normal text-[#859CC2]">Optionnel</span>
+                        <span className="text-xs font-normal text-[#859CC2]">Facultatif</span>
                       </label>
                       <textarea
                         id={noteId}
@@ -600,7 +600,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                         rows={3}
                         value={note}
                         onChange={(e) => setNote(e.target.value)}
-                        placeholder="Je vous propose le restaurant xxxx.... ou examinons les droits de bouchons par exemple......."
+                        placeholder="Je vous propose le restaurant… ou examinons le droit de bouchon, par exemple…"
                         className="neon-input mt-2 w-full resize-none rounded-xl border border-white/15 bg-[#071226]/95 px-4 py-3 text-base text-[#FBF7EF] placeholder-[#6D84A8] focus:outline-none sm:text-sm"
                       />
                     </div>
@@ -617,7 +617,7 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                         <Send className="h-4 w-4 shrink-0" aria-hidden="true" />
                         <span>
                           {status === 'submitting'
-                            ? 'Préparation de ta confirmation...'
+                            ? 'Préparation de ta confirmation…'
                             : 'Clique ici et envoie ta réponse'}
                         </span>
                       </motion.button>
