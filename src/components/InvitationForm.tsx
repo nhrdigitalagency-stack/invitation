@@ -427,10 +427,10 @@ export const InvitationForm: React.FC<InvitationFormProps> = ({
                     <form onSubmit={handleSubmit} noValidate className="space-y-6 sm:space-y-7">
                       <div>
                         <h2 className="font-serif text-2xl font-semibold leading-tight text-[#FBF7EF] sm:text-3xl">
-                          Confirme ta présence et ton vote
+                          Confirmes ta présence et ton vote
                         </h2>
                         <p className="mt-1.5 text-xs leading-relaxed text-[#A5B8D8] sm:text-sm">
-                          Indique ton prénom et tes choix, puis valide pour transmettre ta réponse.
+                          Indiques ton prénom et tes choix, puis valide pour transmettre ta réponse.
                         </p>
                         <div className="neon-divider mt-4 sm:mt-5" aria-hidden="true" />
                       </div>

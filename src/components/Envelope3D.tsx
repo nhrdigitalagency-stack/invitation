@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import { ChevronUp } from 'lucide-react';
 import { EVENT_DETAILS } from '../data/invitation';
 
 interface Envelope3DProps {
@@ -388,26 +387,14 @@ export const Envelope3D: React.FC<Envelope3DProps> = ({ onOpenComplete }) => {
           </div>
         </motion.div>
 
-        {/* Bottom prompt */}
+        {/* Bottom instruction */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-10 flex flex-col items-center gap-1.5 sm:mt-14 sm:gap-2"
+          className="mt-10 flex flex-col items-center sm:mt-14"
         >
-          <button
-            type="button"
-            onClick={handleOpen}
-            disabled={phase !== 'sealed'}
-            className="group inline-flex min-h-[44px] cursor-pointer items-center gap-2 rounded-lg px-4 py-2 text-base font-medium tracking-wide text-[#F7F2E7] transition-colors duration-200 hover:text-[#F1CB80] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E5B96B] sm:text-lg"
-          >
-            <ChevronUp
-              className="h-4 w-4 text-[#E5B96B] transition-transform duration-200 group-hover:-translate-y-0.5"
-              aria-hidden="true"
-            />
-            <span>Tapes pour ouvrir</span>
-          </button>
-          <p className="max-w-xs text-xs leading-relaxed text-[#9BB0D1] sm:max-w-none">
+          <p className="max-w-xs text-sm leading-relaxed text-[#C3D1E8] sm:max-w-none">
             Appuies sur le sceau central de l&apos;enveloppe pour ouvrir
           </p>
         </motion.div>
